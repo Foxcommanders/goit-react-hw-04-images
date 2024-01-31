@@ -56,7 +56,10 @@ export function App() {
   const closeModal = () => {
     setModal({ open: false, modalData: null });
   };
-  const buttonOption = page * 12 >= totalImages;
+  const buttonOption = page  < totalImages / 12
+  {buttonOption && !loading && images.length > 0 && (
+        <Button handlerClick={loadMore}  />
+      )}
 
   return (
     <Section>
