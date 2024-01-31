@@ -56,11 +56,8 @@ export function App() {
   const closeModal = () => {
     setModal({ open: false, modalData: null });
   };
-
-  const buttonOption = page  < totalImages / 12
-  {buttonOption && !loading && images.length > 0 && (
-        <Button handlerClick={loadMore}  />
-      )};
+  
+  const buttonOption = page < Math.ceil(totalImages / 12);
 
   return (
     <Section>
@@ -69,9 +66,10 @@ export function App() {
       {loading && <Loader />}
       <ImageGallery images={images} handlerClick={openModal} />
       {modal.open && <Modal onClose={closeModal} modalData={modal.modalData} />}
-      {images.length > 0 && (
-        <Button handlerClick={loadMore} disabled={buttonOption} />
+      {buttonOption && !loading && images.length > 0 && (
+        <Button handlerClick={loadMore} />
       )}
     </Section>
   );
+
 }
